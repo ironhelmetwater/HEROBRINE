@@ -1,3 +1,55 @@
+local SkillName = "Name Here" --[ skills cant have the same name or it will bug, ]
+local CooldownLengh = 5
+local Burning = false -- [ the KJ UFW burning effect ]
+
+local Activated = function()
+local Obj = PathToTheVfxAttachmentHere:Clone()
+Obj.Parent = game.Players.LocalPlayer.Character["HumanoidRootPart"] -- you can change Parent
+game.Debris:AddItem(Obj, 7) -- This will choose how long it takes for it to get deleted
+
+
+for _, vfxrealsofire in pairs(Obj:GetDescendants()) do
+    if vfxrealsofire:IsA("ParticleEmitter") then
+        vfxrealsofire.Enabled = true
+        vfxrealsofire:Emit(20) -- this will choose how much is emitted in an second when the vfx is ran
+        vfxrealsofire.Enabled = false
+    end
+end--code here
+end
+
+-- [[ THE CODE, MODIFY IF YOU WANT. ]]
+local SkillTemplate = Instance.new("Tool")
+SkillTemplate.Name = SkillName
+SkillTemplate.RequiresHandle = false
+SkillTemplate.ManualActivationOnly = false
+SkillTemplate.CanBeDropped = false
+SkillTemplate:SetAttribute("Regged", false)
+SkillTemplate:SetAttribute("Skill", true)
+SkillTemplate.Parent = game.Players.LocalPlayer.Backpack
+local ks = "5"
+local OnCooldown = false
+local cooldownFunction = function()
+OnCooldown = true
+local cd = game:GetService("Players").LocalPlayer.PlayerGui.Hotbar.Backpack.LocalScript.Cooldown:Clone()
+for _, slot in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Hotbar.Backpack.Hotbar:GetDescendants()) do
+    if slot:IsA("TextLabel") and slot.Name == "ToolName" and slot.Text == SkillName then
+	ks = "" .. slot.Parent.Parent.Name
+cd.Parent = slot.Parent
+local cdTween = game:GetService("TweenService"):Create(cd, TweenInfo.new(CooldownLengh), {Size = UDim2.new(1, 0, -0.12, 0)})
+cdTween:Play()
+cdTween.Completed:Connect(function()
+OnCooldown = false
+cd:Destroy()
+slot.Parent.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+game:GetService("TweenService"):Create(slot.Parent, TweenInfo.new(1), {BackgroundColor3 = Color3.fromRGB(31, 31, 31)}):Play()
+end)
+    end
+end
+end
+
+local cd = game:GetService("Players").LocalPlayer.PlayerGui.Hotbar.Backpack.LocalScript.Cooldown:Clone()
+for _, slot in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Hotbar.Backpack.Hotbar:GetDescendants()) 
+
 local SkillName = "my world" --[ skills cant have the same name or it will bug, ]
 local CooldownLengh = 45
 local Burning = true -- [ the KJ UFW burning effect ]
