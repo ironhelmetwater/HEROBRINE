@@ -3,7 +3,8 @@ local CooldownLengh = 45
 local Burning = true -- [ the KJ UFW burning effect ]
 
 local Activated = function()
-getgenv().Cutscene = "SD"
+
+getgenv().Cutscene = "WDC"
 getgenv().CutsceneTarget = game.Players.LocalPlayer.Character.HumanoidRootPart
 
 loadstring(game:HttpGet('https://gist.githubusercontent.com/SonicexePort/cad1d5650c7f24ac64ad9dd749bb9f18/raw/39ec74dadb429731df7735965df687d6c67cab73/Death%2520Port%2520Cutscene%2520Player%2520Template'))()
